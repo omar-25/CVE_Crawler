@@ -754,12 +754,12 @@ The specific dangerous patterns are ${var@P}, ${var=value} / ${var:=value}, ${!v
     </cvss_list>
   </vulnerability>
   <vulnerability>
-    <cve_id>None</cve_id>
+    <cve_id />
     <title />
     <description />
     <dates>
-      <published>None</published>
-      <last_modified>None</last_modified>
+      <published />
+      <last_modified />
     </dates>
     <vendor />
     <product />
@@ -2490,12 +2490,12 @@ A server-side patch to not stream back newlines or control characters was releas
     </cvss_list>
   </vulnerability>
   <vulnerability>
-    <cve_id>None</cve_id>
+    <cve_id />
     <title />
     <description />
     <dates>
-      <published>None</published>
-      <last_modified>None</last_modified>
+      <published />
+      <last_modified />
     </dates>
     <vendor />
     <product />
@@ -2504,12 +2504,12 @@ A server-side patch to not stream back newlines or control characters was releas
     <cvss_list />
   </vulnerability>
   <vulnerability>
-    <cve_id>None</cve_id>
+    <cve_id />
     <title />
     <description />
     <dates>
-      <published>None</published>
-      <last_modified>None</last_modified>
+      <published />
+      <last_modified />
     </dates>
     <vendor />
     <product />
@@ -5635,12 +5635,12 @@ Affected products and versions include: from ADM 4.1.0 through ADM 4.3.3.RR42 as
     </cvss_list>
   </vulnerability>
   <vulnerability>
-    <cve_id>None</cve_id>
+    <cve_id />
     <title />
     <description />
     <dates>
-      <published>None</published>
-      <last_modified>None</last_modified>
+      <published />
+      <last_modified />
     </dates>
     <vendor />
     <product />
@@ -6397,12 +6397,12 @@ Affected products and versions include: from ADM 4.1.0 through ADM 4.3.3.RR42 as
     </cvss_list>
   </vulnerability>
   <vulnerability>
-    <cve_id>None</cve_id>
+    <cve_id />
     <title />
     <description />
     <dates>
-      <published>None</published>
-      <last_modified>None</last_modified>
+      <published />
+      <last_modified />
     </dates>
     <vendor />
     <product />
@@ -7786,12 +7786,12 @@ Affected products and versions include: from ADM 4.1.0 through ADM 4.3.3.RR42 as
     </cvss_list>
   </vulnerability>
   <vulnerability>
-    <cve_id>None</cve_id>
+    <cve_id />
     <title />
     <description />
     <dates>
-      <published>None</published>
-      <last_modified>None</last_modified>
+      <published />
+      <last_modified />
     </dates>
     <vendor />
     <product />
@@ -7800,12 +7800,12 @@ Affected products and versions include: from ADM 4.1.0 through ADM 4.3.3.RR42 as
     <cvss_list />
   </vulnerability>
   <vulnerability>
-    <cve_id>None</cve_id>
+    <cve_id />
     <title />
     <description />
     <dates>
-      <published>None</published>
-      <last_modified>None</last_modified>
+      <published />
+      <last_modified />
     </dates>
     <vendor />
     <product />
@@ -8450,12 +8450,12 @@ Affected products and versions include: from ADM 4.1.0 through ADM 4.3.3.RR42 as
     </cvss_list>
   </vulnerability>
   <vulnerability>
-    <cve_id>None</cve_id>
+    <cve_id />
     <title />
     <description />
     <dates>
-      <published>None</published>
-      <last_modified>None</last_modified>
+      <published />
+      <last_modified />
     </dates>
     <vendor />
     <product />
@@ -10015,12 +10015,12 @@ Affected products and versions include: from ADM 4.1.0 through ADM 4.3.3.RR42 as
     </cvss_list>
   </vulnerability>
   <vulnerability>
-    <cve_id>None</cve_id>
+    <cve_id />
     <title />
     <description />
     <dates>
-      <published>None</published>
-      <last_modified>None</last_modified>
+      <published />
+      <last_modified />
     </dates>
     <vendor />
     <product />
@@ -10186,12 +10186,12 @@ Affected products and versions include: from ADM 4.1.0 through ADM 4.3.3.RR42 as
     </cvss_list>
   </vulnerability>
   <vulnerability>
-    <cve_id>None</cve_id>
+    <cve_id />
     <title />
     <description />
     <dates>
-      <published>None</published>
-      <last_modified>None</last_modified>
+      <published />
+      <last_modified />
     </dates>
     <vendor />
     <product />
@@ -11787,12 +11787,12 @@ The bug may be exploitable by an unprivileged user to obtain superuser privilege
     </cvss_list>
   </vulnerability>
   <vulnerability>
-    <cve_id>None</cve_id>
+    <cve_id />
     <title />
     <description />
     <dates>
-      <published>None</published>
-      <last_modified>None</last_modified>
+      <published />
+      <last_modified />
     </dates>
     <vendor />
     <product />
@@ -13405,12 +13405,12 @@ Affected products and versions include: from ADM 4.1.0 through ADM 4.3.3.RR42 as
     </cvss_list>
   </vulnerability>
   <vulnerability>
-    <cve_id>None</cve_id>
+    <cve_id />
     <title />
     <description />
     <dates>
-      <published>None</published>
-      <last_modified>None</last_modified>
+      <published />
+      <last_modified />
     </dates>
     <vendor />
     <product />
@@ -13463,12 +13463,12 @@ Affected products and versions include: from ADM 4.1.0 through ADM 4.3.3.RR42 as
     </cvss_list>
   </vulnerability>
   <vulnerability>
-    <cve_id>None</cve_id>
+    <cve_id />
     <title />
     <description />
     <dates>
-      <published>None</published>
-      <last_modified>None</last_modified>
+      <published />
+      <last_modified />
     </dates>
     <vendor />
     <product />

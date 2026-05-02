@@ -2,50 +2,56 @@ import json
 import xml.etree.ElementTree as ET
 import os
 
+def safe(val):
+    """Convert None to empty string, otherwise return string representation."""
+    if val is None:
+        return ""
+    if isinstance(val, list):
+        return val  # lists handled separately
+    return str(val).strip()
 
 json_path = os.path.join("..", "preprocessing", "cleaned_version_cve.json")
 
-
 with open(json_path, "r", encoding="utf-8") as f:
     data = json.load(f)
-
 
 root = ET.Element("vulnerabilities")
 
 for item in data:
     vuln = ET.SubElement(root, "vulnerability")
 
-    ET.SubElement(vuln, "cve_id").text = str(item.get("cve_id", ""))
-    ET.SubElement(vuln, "title").text = str(item.get("title", ""))
-    ET.SubElement(vuln, "description").text = str(item.get("description", ""))
+    ET.SubElement(vuln, "cve_id").text       = safe(item.get("cve_id"))
+    ET.SubElement(vuln, "title").text        = safe(item.get("title"))
+    ET.SubElement(vuln, "description").text  = safe(item.get("description"))
 
-  
     dates = ET.SubElement(vuln, "dates")
-    ET.SubElement(dates, "published").text = str(item.get("published_date", ""))
-    ET.SubElement(dates, "last_modified").text = str(item.get("last_modified_date", ""))
+    ET.SubElement(dates, "published").text      = safe(item.get("published_date"))
+    ET.SubElement(dates, "last_modified").text  = safe(item.get("last_modified_date"))
 
+    ET.SubElement(vuln, "vendor").text       = safe(item.get("vendor"))
+    ET.SubElement(vuln, "product").text      = safe(item.get("product"))
+    ET.SubElement(vuln, "attack_type").text  = safe(item.get("attack_type"))
 
-    ET.SubElement(vuln, "vendor").text = str(item.get("vendor", ""))
-    ET.SubElement(vuln, "product").text = str(item.get("product", ""))
-
-    ET.SubElement(vuln, "attack_type").text = str(item.get("attack_type", ""))
-
- 
+    # CWE list — skip if None or empty
     cwe_list = ET.SubElement(vuln, "cwe_list")
-    for cwe in item.get("cwe", []):
-        cwe_el = ET.SubElement(cwe_list, "cwe")
-        ET.SubElement(cwe_el, "id").text = str(cwe.get("id", ""))
-        ET.SubElement(cwe_el, "name").text = str(cwe.get("name", ""))
+    cwe_data = item.get("cwe")
+    if isinstance(cwe_data, list):
+        for cwe in cwe_data:
+            if isinstance(cwe, dict):
+                cwe_el = ET.SubElement(cwe_list, "cwe")
+                ET.SubElement(cwe_el, "id").text    = safe(cwe.get("id"))
+                ET.SubElement(cwe_el, "name").text  = safe(cwe.get("name"))
 
-
+    # CVSS list — skip if None or empty
     cvss_list = ET.SubElement(vuln, "cvss_list")
-    for cvss in item.get("cvss", []):
-        cvss_el = ET.SubElement(cvss_list, "cvss")
-        ET.SubElement(cvss_el, "score").text = str(cvss.get("score", ""))
-        ET.SubElement(cvss_el, "severity").text = str(cvss.get("severity", ""))
-        ET.SubElement(cvss_el, "version").text = str(cvss.get("version", ""))
-
-
+    cvss_data = item.get("cvss")
+    if isinstance(cvss_data, list):
+        for cvss in cvss_data:
+            if isinstance(cvss, dict):
+                cvss_el = ET.SubElement(cvss_list, "cvss")
+                ET.SubElement(cvss_el, "score").text     = safe(cvss.get("score"))
+                ET.SubElement(cvss_el, "severity").text  = safe(cvss.get("severity"))
+                ET.SubElement(cvss_el, "version").text   = safe(cvss.get("version"))
 
 def indent(elem, level=0):
     i = "\n" + level * "  "
@@ -61,9 +67,6 @@ def indent(elem, level=0):
 
 indent(root)
 
-
 output_path = "output.xml"
 tree = ET.ElementTree(root)
 tree.write(output_path, encoding="utf-8", xml_declaration=True)
-
-print(" XML file created at:", output_path)
