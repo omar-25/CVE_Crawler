@@ -3,13 +3,13 @@ import json
 
 def clean_cve(raw):
 
-    # ── Fix 0: Normalize vendor/product (NEW)
+    
     def normalize_vendor_product(vendor, product):
         corrections = {
             "PromtEngineer": "PromptEngineer"
         }
 
-        # Handle None safely
+      
         vendor = (vendor or "").strip()
         product = (product or "").strip()
 
@@ -18,7 +18,7 @@ def clean_cve(raw):
         return vendor, product
 
 
-    # ── Fix 1: Remove markdown links like [server.py](http://server.py) → server.py
+   
     def remove_markdown(text):
         if not text:
             return ""
@@ -26,30 +26,29 @@ def clean_cve(raw):
         
 
 
-    # ── Fix 2: Improve title cleaning (UPDATED)
     def clean_title(title):
         if not title:
             return ""
         
-        title = re.sub(r'^Title:\s*', '', title)   # remove "Title:"
+        title = re.sub(r'^Title:\s*', '', title)   
         title = remove_markdown(title)
 
-        # Remove file names like server.py
+     
         title = re.sub(r'\b\w+\.py\b', '', title)
 
-        # Remove function names like _route_using_overviews
+       
         title = re.sub(r'\b_[a-zA-Z0-9_]+\b', '', title)
 
-        # Remove repeated words like "injection injection"
+        
         title = re.sub(r'\b(injection)\b.*\b\1\b', r'\1', title, flags=re.IGNORECASE)
 
-        # Clean extra spaces
+        
         title = re.sub(r'\s+', ' ', title).strip()
 
         return title
 
 
-    # ── Fix 3: Fix CVSS scores list
+   
     def clean_cvss(cvss_list):
         
         result = []
@@ -71,7 +70,7 @@ def clean_cve(raw):
         return result
 
 
-    # ── Fix 4: Split CWE string into id and name
+   
     def clean_cwe(cwe_list):
         if not cwe_list:
             return []
@@ -86,21 +85,21 @@ def clean_cve(raw):
         return result
 
 
-    # ── Fix 5: Remove "affected at " from versions
+    
     def clean_versions(versions):
         if not versions:
             return []
         return [v.replace("affected at ", "") for v in versions]
 
 
-    # ── Apply vendor normalization (NEW)
+    
     vendor, product = normalize_vendor_product(
         raw["vendor"],
         raw["product"]
     )
 
 
-    # ── Build the final clean object ──────────────────────────────────────────
+    
     return {
         "cve_id":             raw["cve_id"],
         "title":              clean_title(raw["title"]),
@@ -116,7 +115,6 @@ def clean_cve(raw):
     }
 
 
-# ── Run ───────────────────────────────────────────────────────────────
 with open("cve_data.json", "r", encoding="utf-8") as file:
     data = json.load(file)
 
