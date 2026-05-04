@@ -1,12 +1,3 @@
-"""
-====================================================
-  CVE Dataset — Exploratory Data Analysis (EDA)
-             & Data Visualization
-====================================================
-Requirements:
-    pip install matplotlib seaborn pandas lxml wordcloud
-"""
-
 import xml.etree.ElementTree as ET
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -15,12 +6,17 @@ import matplotlib.patches as mpatches
 import seaborn as sns
 import warnings
 
+
+
+#----------------------------------------------
+# 1. LOAD & PARSE XML
+#----------------------------------------------
+
+
+
 warnings.filterwarnings("ignore")
 
-# ─────────────────────────────────────────────
-# 1.  LOAD & PARSE XML
-# ─────────────────────────────────────────────
-XML_FILE = r"C:\Users\Ahmed\Desktop\CVE_Crawler\src\Analysis\output.xml"
+XML_FILE = r"C:\Users\Ahmed\Desktop\Analysis\output.xml"
 
 try:
     tree = ET.parse(XML_FILE)
@@ -29,23 +25,28 @@ except Exception as e:
     print(f"Error loading XML: {e}")
     exit()
 
+
+
+#----------------------------------------------
+# 2. EXTRACT VULNERABILITY DATA
+#----------------------------------------------
+
+
+
 records = []
 for vuln in root.findall("vulnerability"):
     cve_id = vuln.findtext("cve_id", "")
     
-    # --- BULLETPROOF VENDOR CHECK ---
     raw_vendor = vuln.findtext("vendor")
     if not raw_vendor or not raw_vendor.strip():
         vendor = "Unknown Vendor"
     else:
         vendor = raw_vendor.strip()
-    # --------------------------------
         
     product = vuln.findtext("product", "")
     attack_type = vuln.findtext("attack_type", "Unknown")
     published = vuln.findtext("dates/published", "") 
 
-    # Prioritize newest CVSS version instead of just taking the max score
     best_score = None
     highest_version = 0.0
     for cvss in vuln.findall("cvss_list/cvss"):
@@ -61,7 +62,6 @@ for vuln in root.findall("vulnerability"):
             pass
     max_score = best_score
     
-    # Properly handle missing CWEs so they don't skew the charts to 0
     cwes = vuln.findall("cwe_list/cwe")
     num_cwes = len(cwes) if cwes else None
 
@@ -75,9 +75,16 @@ for vuln in root.findall("vulnerability"):
         "num_cwes":    num_cwes,
     })
 
+
+
+#----------------------------------------------
+# 3. BUILD & CLEAN DATAFRAME
+#----------------------------------------------
+
+
+
 df = pd.DataFrame(records)
 
-# Clean ghost records and empty strings to prevent blank data pollution
 df["cve_id"].replace("", pd.NA, inplace=True)
 df.dropna(subset=["cve_id"], inplace=True)
 df["product"].replace("", "Unknown Product", inplace=True)
@@ -95,9 +102,14 @@ def severity_bucket(score):
 
 df["severity"] = df["max_score"].apply(severity_bucket)
 
-# ─────────────────────────────────────────────
-# 2.  EDA — PRINT STATISTICS
-# ─────────────────────────────────────────────
+
+
+#----------------------------------------------
+# 4. PRINT STATISTICS
+#----------------------------------------------
+
+
+
 print("=" * 60)
 print("  EXPLORATORY DATA ANALYSIS — CVE DATASET")
 print("=" * 60)
@@ -115,9 +127,14 @@ print(df["vendor"].value_counts().head(10).to_string())
 print("\n-- Severity Distribution --")
 print(df["severity"].value_counts().to_string())
 
-# ─────────────────────────────────────────────
-# 3.  STYLE
-# ─────────────────────────────────────────────
+
+
+#----------------------------------------------
+# 5. VISUALIZATION SETUP
+#----------------------------------------------
+
+
+
 SEVERITY_COLORS = {
     "CRITICAL": "#d62728",
     "HIGH":     "#ff7f0e",
@@ -137,14 +154,18 @@ plt.rcParams.update({
     "figure.facecolor": "white",
 })
 
-# ─────────────────────────────────────────────
-# 4.  SINGLE FIGURE — 2x4 GRID
-# ─────────────────────────────────────────────
 fig = plt.figure(figsize=(26, 22))
 fig.suptitle("CVE Dataset — Exploratory Data Analysis & Visualizations",
              fontsize=14, fontweight="bold", y=0.99)
 
-# ── Plot 1: Severity Pie Chart ────────────────────────────
+
+
+#----------------------------------------------
+# 6. PLOT 1: SEVERITY PIE CHART
+#----------------------------------------------
+
+
+
 ax1 = fig.add_subplot(2, 4, 1)
 sev_counts = df["severity"].value_counts()
 colors = [SEVERITY_COLORS.get(s, "#aaa") for s in sev_counts.index]
@@ -182,7 +203,14 @@ ax1.legend(
 )
 ax1.set_title("Severity Distribution\n(Highest CVSS Score per CVE)")
 
-# ── Plot 2: CVSS Score Histogram ──────────────────────────
+
+
+#----------------------------------------------
+# 7. PLOT 2: CVSS SCORE HISTOGRAM
+#----------------------------------------------
+
+
+
 ax2 = fig.add_subplot(2, 4, 2)
 bins = 20
 n, bin_edges, patches = ax2.hist(
@@ -223,7 +251,14 @@ ax2.set_title("CVSS Score Distribution\n(Bars coloured by Severity Level)")
 ax2.set_xlabel("Highest Version CVSS Score per CVE")
 ax2.set_ylabel("Number of CVEs")
 
-# ── Plot 3: Monthly CVE Trend (Dynamic Recent Year) ───────
+
+
+#----------------------------------------------
+# 8. PLOT 3: MONTHLY CVE TREND
+#----------------------------------------------
+
+
+
 ax3 = fig.add_subplot(2, 4, 3)
 df_valid_dates = df.dropna(subset=["published"])
 
@@ -253,7 +288,14 @@ else:
     ax3.set_title("Monthly CVE Publication Trend\n(No Valid Dates Found)")
     ax3.text(0.5, 0.5, "Insufficient Data", ha="center", va="center")
 
-# ── Plot 4: Top 10 Vendors ────────────────────────────────
+
+
+#----------------------------------------------
+# 9. PLOT 4: TOP 10 VENDORS
+#----------------------------------------------
+
+
+
 ax4 = fig.add_subplot(2, 4, 4)
 top_vendors = df["vendor"].value_counts().head(10)
 bars = ax4.bar(range(len(top_vendors)), top_vendors.values,
@@ -263,7 +305,6 @@ ax4.set_xlabel("Vendor")
 ax4.set_ylabel("Number of CVEs")
 ax4.set_xticks(range(len(top_vendors)))
 
-# Fix: Rotate 45 degrees and anchor to the right to stop labels floating away
 ax4.set_xticklabels(
     top_vendors.index, 
     rotation=45, 
@@ -277,7 +318,14 @@ for bar in bars:
     ax4.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + (top_vendors.max()*0.02),
              str(int(bar.get_height())), ha="center", fontsize=7)
 
-# ── Plot 5: CVSS Box Plot by Severity ────────────────────
+
+
+#----------------------------------------------
+# 10. PLOT 5: CVSS SCORE BY SEVERITY
+#----------------------------------------------
+
+
+
 ax5 = fig.add_subplot(2, 4, 5)
 order_present = [s for s in ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
                  if s in df["severity"].values]
@@ -309,7 +357,14 @@ ax5.axhline(9.0, color=SEVERITY_COLORS["CRITICAL"], linestyle="--",
             linewidth=0.8, alpha=0.6, label="CRITICAL threshold (9.0)")
 ax5.legend(fontsize=6, loc="upper left")
 
-# ── Plot 6: CWE Count per Vulnerability (WITH ATTACK TYPES) ─
+
+
+#----------------------------------------------
+# 11. PLOT 6: NUMBER OF CWES
+#----------------------------------------------
+
+
+
 ax6 = fig.add_subplot(2, 4, 6)
 df_cwe = df.dropna(subset=['num_cwes'])
 
@@ -337,7 +392,14 @@ else:
     ax6.set_title("Number of CWEs per Vulnerability")
     ax6.text(0.5, 0.5, "No CWE Data", ha="center", va="center")
 
-# ── Plot 7: Avg CVSS by Attack Type ──────────────────────
+
+
+#----------------------------------------------
+# 12. PLOT 7: AVG CVSS BY ATTACK TYPE
+#----------------------------------------------
+
+
+
 ax7 = fig.add_subplot(2, 4, 7)
 avg_cvss = (df.groupby("attack_type")["max_score"]
               .mean().dropna()
@@ -358,7 +420,14 @@ ax7.set_xlabel("Average CVSS Score")
 ax7.set_xlim(0, 11)
 ax7.legend(fontsize=7, loc="lower right")
 
-# ── Plot 8: Stacked Bar — Severity per Attack Type ────────
+
+
+#----------------------------------------------
+# 13. PLOT 8: SEVERITY BREAKDOWN
+#----------------------------------------------
+
+
+
 ax8 = fig.add_subplot(2, 4, 8)
 pivot = (df.groupby(["attack_type", "severity"])
            .size().unstack(fill_value=0))
@@ -385,19 +454,31 @@ if not pivot.empty:
     for i, total in enumerate(totals):
         ax8.text(i, total + (totals.max()*0.02), str(int(total)), ha="center", fontsize=7)
 
-# ── Final layout ──────────────────────────────────────────
+
+
+#----------------------------------------------
+# 14. FINALIZE & SAVE
+#----------------------------------------------
+
+
+
 plt.subplots_adjust(
     left=0.06, right=0.97,
     top=0.93,  bottom=0.10,
-    wspace=0.40, hspace=0.85 # Increased height space to prevent overlapping labels
+    wspace=0.40, hspace=0.85 
 )
 plt.savefig("cve_eda_visualizations.png", dpi=150, bbox_inches="tight")
 plt.show()
 print("\nSaved: cve_eda_visualizations.png")
 
-# ─────────────────────────────────────────────
-# 5.  KEY INSIGHTS
-# ─────────────────────────────────────────────
+
+
+#----------------------------------------------
+# 15. PRINT KEY INSIGHTS
+#----------------------------------------------
+
+
+
 print("\n" + "=" * 60)
 print("  KEY INSIGHTS")
 print("=" * 60)
