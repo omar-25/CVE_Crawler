@@ -68,7 +68,6 @@ def clean_cve(raw):
             severity = item.get("severity") or "unknown"
             vector = item.get("vector")
          
-            score = float(score) if score == None else 0.0
 
             if vector == "":
                 vector = "unknown"
