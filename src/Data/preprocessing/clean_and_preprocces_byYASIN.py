@@ -115,10 +115,10 @@ def clean_cve(raw):
     }
 
 
-with open("cve_data.json", "r", encoding="utf-8") as file:
+with open("cve_data2.json", "r", encoding="utf-8") as file:
     data = json.load(file)
 
 cleaned = [clean_cve(item) for item in data]
 
-with open("cleaned_version_cve.json", "w", encoding="utf-8") as file:
+with open("cleaned_version_cve2.json", "w", encoding="utf-8") as file:
     json.dump(cleaned, file, indent=4, ensure_ascii=False)
