@@ -9,7 +9,7 @@ def safe(val):
         return val
     return str(val).strip()
 
-json_path = os.path.join("..", "preprocessing", "cleaned_version_cve2.json")
+json_path = os.path.join("..", "preprocessing", "cleaned_version_cve.json")
 
 with open(json_path, "r", encoding="utf-8") as f:
     data = json.load(f)
@@ -64,6 +64,6 @@ def indent(elem, level=0):
 
 indent(root)
 
-output_path = "output2.xml"
+output_path = "output.xml"
 tree = ET.ElementTree(root)
 tree.write(output_path, encoding="utf-8", xml_declaration=True)
