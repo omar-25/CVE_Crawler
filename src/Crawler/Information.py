@@ -10,13 +10,16 @@ class Information:
         self.searchButtonClass = "cve-button-accent-warm"
         self.searchBarClass = "cve-id-input"
         self.cookieCloseClass = "osano-cm-dialog__close"
+        
         self.CVELink="https://www.cve.org/CVERecord?id="
         self.CVE_CSS_Selector="a[href^='/CVERecord?id=']"
         self.forwardButtonClass = "pagination-next"
-        self.backButtonClass = "pagination-previous"
         
+        self.backButtonClass = "pagination-previous"        
+        self.showMoreButtonCss ='[aria-label="Select how many search results to show"]'
         self.searchButton = self.waitAndGet(By.CLASS_NAME, self.searchButtonClass)
         self.searchBar = self.waitAndGet(By.CLASS_NAME, self.searchBarClass)
+        self.ShowMoreButton=None
         self.forwardButton = self.backButton = None
 
 

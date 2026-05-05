@@ -3,11 +3,10 @@ import xml.etree.ElementTree as ET
 import os
 
 def safe(val):
-    """Convert None to empty string, otherwise return string representation."""
     if val is None:
         return ""
     if isinstance(val, list):
-        return val  # lists handled separately
+        return val
     return str(val).strip()
 
 json_path = os.path.join("..", "preprocessing", "cleaned_version_cve.json")
@@ -32,7 +31,6 @@ for item in data:
     ET.SubElement(vuln, "product").text      = safe(item.get("product"))
     ET.SubElement(vuln, "attack_type").text  = safe(item.get("attack_type"))
 
-    # CWE list — skip if None or empty
     cwe_list = ET.SubElement(vuln, "cwe_list")
     cwe_data = item.get("cwe")
     if isinstance(cwe_data, list):
@@ -42,7 +40,6 @@ for item in data:
                 ET.SubElement(cwe_el, "id").text    = safe(cwe.get("id"))
                 ET.SubElement(cwe_el, "name").text  = safe(cwe.get("name"))
 
-    # CVSS list — skip if None or empty
     cvss_list = ET.SubElement(vuln, "cvss_list")
     cvss_data = item.get("cvss")
     if isinstance(cvss_data, list):

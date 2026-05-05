@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select
 
 class Movement:
     def __init__(self, driver, info):
@@ -50,4 +51,12 @@ class Movement:
             self.info.backButton.click()
         except Exception as e:
             print(f"Error occurred while clicking back button: {e}")
+    
+    def selectShowMore(self,number="200"):
+        self.info.ShowMoreButton =self.info.waitAndGet(By.CSS_SELECTOR, self.info.showMoreButtonCss)
+        select=Select(self.info.ShowMoreButton)
+        try:
+            select.select_by_visible_text(number)
+        except Exception as e:
+            print(f"Error occurred while clicking Show More button: {e}")
 
