@@ -20,15 +20,21 @@ root = ET.Element("vulnerabilities")
 for item in data:
     vuln = ET.SubElement(root, "vulnerability")
 
-    ET.SubElement(vuln, "cve_id").text       = safe(item.get("cve_id"))
-    ET.SubElement(vuln, "title").text        = safe(item.get("title"))
-    ET.SubElement(vuln, "description").text  = safe(item.get("description"))
+    ET.SubElement(vuln, "cve_id").text      = safe(item.get("cve_id"))
+    ET.SubElement(vuln, "title").text       = safe(item.get("title"))
+    ET.SubElement(vuln, "description").text = safe(item.get("description"))
 
     dates = ET.SubElement(vuln, "dates")
     ET.SubElement(dates, "published").text      = safe(item.get("published_date"))
     ET.SubElement(dates, "last_modified").text  = safe(item.get("last_modified_date"))
 
-    ET.SubElement(vuln, "vendor").text       = safe(item.get("vendor"))
+    raw_vendor = item.get("vendor")
+    if str(raw_vendor).strip().lower() == "n/a":
+        raw_vendor = "unknown"
+    
+    ET.SubElement(vuln, "vendor").text       = safe(raw_vendor)
+
+    
     ET.SubElement(vuln, "product").text      = safe(item.get("product"))
     ET.SubElement(vuln, "attack_type").text  = safe(item.get("attack_type"))
 

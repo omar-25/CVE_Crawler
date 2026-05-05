@@ -2049,7 +2049,7 @@ This issue was fixed in commit 0c75fb57f89d0b7d9b180026bc2624b7dcf807da</descrip
       <published>2025-10-08</published>
       <last_modified>2025-10-08</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2025-10-08</product>
     <attack_type>Prompt Injection</attack_type>
     <cwe_list>
@@ -4646,7 +4646,7 @@ A server-side patch to not stream back newlines or control characters was releas
       <published>2026-04-29</published>
       <last_modified>2026-04-29</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-04-29</product>
     <attack_type>SQL Injection</attack_type>
     <cwe_list>
@@ -4734,7 +4734,7 @@ A server-side patch to not stream back newlines or control characters was releas
       <published>2026-04-28</published>
       <last_modified>2026-04-28</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-04-28</product>
     <attack_type>SQL Injection</attack_type>
     <cwe_list>
@@ -6772,7 +6772,7 @@ A server-side patch to not stream back newlines or control characters was releas
       <published>2026-04-25</published>
       <last_modified>2026-04-25</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-04-25</product>
     <attack_type>SQL Injection</attack_type>
     <cwe_list>
@@ -9200,7 +9200,7 @@ Affected products and versions include: from ADM 4.1.0 through ADM 4.3.3.RR42 as
       <published>2026-04-07</published>
       <last_modified>2026-04-07</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-04-07</product>
     <attack_type>SQL Injection</attack_type>
     <cwe_list>
@@ -14458,7 +14458,7 @@ This issue affects pimcore: 12.3.3.</description>
       <published>2026-03-20</published>
       <last_modified>2026-03-20</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-20</product>
     <attack_type>SQL Injection</attack_type>
     <cwe_list>
@@ -15472,7 +15472,7 @@ This issue affects pimcore: 12.3.3.</description>
       <published>2026-03-16</published>
       <last_modified>2026-03-16</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-16</product>
     <attack_type>SQL Injection</attack_type>
     <cwe_list>
@@ -15861,7 +15861,7 @@ This issue affects pimcore: 12.3.3.</description>
       <published>2026-03-15</published>
       <last_modified>2026-03-15</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-15</product>
     <attack_type>SQL Injection</attack_type>
     <cwe_list>
@@ -17870,7 +17870,7 @@ This issue affects WebinarIgnition: from n/a through 4.08.253.</description>
       <published>2026-03-08</published>
       <last_modified>2026-03-08</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-08</product>
     <attack_type>SQL Injection</attack_type>
     <cwe_list>
@@ -17914,7 +17914,7 @@ This issue affects WebinarIgnition: from n/a through 4.08.253.</description>
       <published>2026-03-08</published>
       <last_modified>2026-03-08</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-08</product>
     <attack_type>SQL Injection</attack_type>
     <cwe_list>
@@ -19816,7 +19816,7 @@ This issue affects WebinarIgnition: from n/a through 4.08.253.</description>
       <published>2026-03-07</published>
       <last_modified>2026-03-07</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-07</product>
     <attack_type>SQL Injection</attack_type>
     <cwe_list>
@@ -22381,7 +22381,7 @@ Users are recommended to upgrade to version 4.18.1 or 4.19.0, fixing the issue.<
       <published>2026-02-27</published>
       <last_modified>2026-02-27</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-02-27</product>
     <attack_type>SQL Injection</attack_type>
     <cwe_list>
@@ -25615,7 +25615,7 @@ Email us at security@mautic.org</description>
       <published>2026-02-23</published>
       <last_modified>2026-02-20</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-02-20</product>
     <attack_type>SQL Injection</attack_type>
     <cwe_list>
@@ -30212,7 +30212,7 @@ path / request_path values—derived from the url_key stored in the database—i
       <published>2026-04-21</published>
       <last_modified>2026-04-21</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-04-21</product>
     <attack_type>Cross-Site Scripting</attack_type>
     <cwe_list>
@@ -30855,7 +30855,7 @@ path / request_path values—derived from the url_key stored in the database—i
       <published>2026-04-20</published>
       <last_modified>2026-04-20</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-04-20</product>
     <attack_type>Cross-Site Scripting</attack_type>
     <cwe_list>
@@ -31012,7 +31012,7 @@ path / request_path values—derived from the url_key stored in the database—i
       <published>2026-04-17</published>
       <last_modified>2026-04-17</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-04-17</product>
     <attack_type>Cross-Site Scripting</attack_type>
     <cwe_list>
@@ -31300,7 +31300,7 @@ path / request_path values—derived from the url_key stored in the database—i
       <published>2026-04-13</published>
       <last_modified>2026-04-13</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-04-13</product>
     <attack_type>Cross-Site Scripting</attack_type>
     <cwe_list>
@@ -32756,7 +32756,7 @@ path / request_path values—derived from the url_key stored in the database—i
       <published>2026-04-05</published>
       <last_modified>2026-04-05</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-04-05</product>
     <attack_type>Cross-Site Scripting</attack_type>
     <cwe_list>
@@ -33051,7 +33051,7 @@ path / request_path values—derived from the url_key stored in the database—i
       <published>2026-04-03</published>
       <last_modified>2026-04-03</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-04-03</product>
     <attack_type>Cross-Site Scripting</attack_type>
     <cwe_list>
@@ -33654,7 +33654,7 @@ This issue affects pimcore: v12.3.3.</description>
       <published>2026-04-01</published>
       <last_modified>2026-04-01</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-04-01</product>
     <attack_type>Cross-Site Scripting</attack_type>
     <cwe_list>
@@ -33936,7 +33936,7 @@ This issue affects pimcore: v12.3.3.</description>
       <published>2026-04-15</published>
       <last_modified>2026-04-15</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-04-15</product>
     <attack_type>Cross-Site Scripting</attack_type>
     <cwe_list />
@@ -35475,7 +35475,7 @@ Since SVG files can contain embedded JavaScript, an attacker can upload a malici
       <published>2026-03-27</published>
       <last_modified>2026-03-24</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-24</product>
     <attack_type>Cross-Site Scripting</attack_type>
     <cwe_list>
@@ -35825,7 +35825,7 @@ Since SVG files can contain embedded JavaScript, an attacker can upload a malici
       <published>2026-03-21</published>
       <last_modified>2026-03-21</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-21</product>
     <attack_type>Cross-Site Scripting</attack_type>
     <cwe_list>
@@ -36933,7 +36933,7 @@ This issue occurs in versions released before December 2025.</description>
       <published>2026-03-16</published>
       <last_modified>2026-03-16</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-16</product>
     <attack_type>Cross-Site Scripting</attack_type>
     <cwe_list>
@@ -37110,7 +37110,7 @@ This issue occurs in versions released before December 2025.</description>
       <published>2026-03-15</published>
       <last_modified>2026-03-15</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-15</product>
     <attack_type>Cross-Site Scripting</attack_type>
     <cwe_list>
@@ -40832,7 +40832,7 @@ The issue has been remediated on the `master` branch, and in the release branche
       <published>2026-03-11</published>
       <last_modified>2026-03-11</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-11</product>
     <attack_type>Cross-Site Scripting</attack_type>
     <cwe_list>
@@ -41439,7 +41439,7 @@ The issue has been remediated on the `master` branch, and in the release branche
       <published>2026-03-11</published>
       <last_modified>2026-03-11</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-11</product>
     <attack_type>Cross-Site Scripting</attack_type>
     <cwe_list />
@@ -54003,7 +54003,7 @@ Affected products and versions include: from ADM 4.1.0 through ADM 4.3.3.RR42 as
       <published>2026-04-17</published>
       <last_modified>2026-04-17</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-04-17</product>
     <attack_type>Buffer Overflow</attack_type>
     <cwe_list>
@@ -58391,7 +58391,7 @@ To remediate this issue, users should upgrade to version 0.6.0 or later.</descri
       <published>2026-03-29</published>
       <last_modified>2026-03-29</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-29</product>
     <attack_type>Buffer Overflow</attack_type>
     <cwe_list>
@@ -60797,7 +60797,7 @@ The `b64decoder` string is sized dynamically, but it is then copied to the `Buff
       <published>2026-03-15</published>
       <last_modified>2026-03-15</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-15</product>
     <attack_type>Buffer Overflow</attack_type>
     <cwe_list>
@@ -62103,7 +62103,7 @@ Affected version is prior to commit  1.30.0.</description>
       <published>2026-03-12</published>
       <last_modified>2026-03-12</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-12</product>
     <attack_type>Buffer Overflow</attack_type>
     <cwe_list>
@@ -62147,7 +62147,7 @@ Affected version is prior to commit  1.30.0.</description>
       <published>2026-03-12</published>
       <last_modified>2026-03-12</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-12</product>
     <attack_type>Buffer Overflow</attack_type>
     <cwe_list>
@@ -64479,7 +64479,7 @@ Stack-based Buffer Overflow vulnerability.</description>
       <published>2026-03-05</published>
       <last_modified>2026-03-05</last_modified>
     </dates>
-    <vendor>unknown</vendor>
+    <vendor>n/a</vendor>
     <product>2026-03-05</product>
     <attack_type>Buffer Overflow</attack_type>
     <cwe_list>
