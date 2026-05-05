@@ -7,7 +7,7 @@ class CVE:
         self.published_date      = published_date
         self.last_modified_date  = last_modified_date
         self.cwe                 = [c.text.strip() for c in cwe] if cwe else []
-        self.cvss                = cvss        # list of dicts {score, severity, version, vector}
+        self.cvss                = cvss        
         self.vendor              = vendor
         self.product             = product
         self.affected_versions   = affected_versions if affected_versions else []
