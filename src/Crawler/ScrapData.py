@@ -7,6 +7,17 @@ class ScrapData:
         self.headers = {"User-Agent": "CVECrawler/1.0"}
         self.driver = driver
 
+    def checkRobotsTxt(self, url):
+        response = req.get(url, headers=self.headers)
+        print(response.text.strip())
+        notAllowedPaths = []
+        for line in response.text.splitlines():
+            if line.startswith("Disallow:"):
+                path = line.split(":", 1)[1].strip()
+                notAllowedPaths.append(path)
+        print("Not allowed paths:", notAllowedPaths)
+        return notAllowedPaths
+
 
     def scrap(self, url):
         self.driver.get(url)
@@ -59,7 +70,7 @@ class ScrapData:
             return cvssData
         
         rows = table.find("tbody").find_all("tr")
-        #print(f"Found {len(rows)} rows")  # debug
+        #print(f"Found {len(rows)} rows")
         
         for row in rows:
             score    = row.find("td", attrs={"data-label": "Score"})
