@@ -72,7 +72,7 @@ df = pd.DataFrame(records)
 print(f"[1] Total records loaded      : {len(df)}")
 
 # ─────────────────────────────────────────────
-# 2. DROP UNKNOWNS
+# 2. DROP UNKNOWNS (CRITICAL FIELDS)
 # ─────────────────────────────────────────────
 IS_UNKNOWN = (
     (df["cve_id"].str.lower()      == "unknown") |
@@ -82,14 +82,12 @@ IS_UNKNOWN = (
 unknown_count = IS_UNKNOWN.sum()
 df = df[~IS_UNKNOWN].reset_index(drop=True)
 print(f"[2] Unknown records dropped   : {unknown_count}")
-print(f"    Records remaining         : {len(df)}")
 
 # ─────────────────────────────────────────────
 # 3. CLEAN & NORMALIZE
 # ─────────────────────────────────────────────
 
 def clean_text(s):
-    """Remove newlines, tabs, and extra spaces from any text field."""
     if not s:
         return ""
     s = re.sub(r"[\r\n\t]+", " ", s)
@@ -132,6 +130,15 @@ def clean_cwe_names(names_str):
     return "|".join(cleaned)
 
 df["cwe_names_clean"] = df["cwe_names"].apply(clean_cwe_names)
+
+# Drop missing vendors
+IS_UNKNOWN_VENDOR = df["vendor_clean"].str.lower() == "unknown"
+df = df[~IS_UNKNOWN_VENDOR].reset_index(drop=True)
+
+# Deduplication
+initial_len = len(df)
+df = df.drop_duplicates(subset=["cve_id"], keep="last").reset_index(drop=True)
+print(f"Dropped {initial_len - len(df)} duplicate CVE IDs.")
 
 # ─────────────────────────────────────────────
 # 4. FEATURE EXTRACTION
@@ -189,6 +196,16 @@ df["severity_numeric"] = df["severity_level"].map(SEVERITY_MAP)
 df["has_cvss"]         = df["cvss_score"].notna().astype(int)
 
 # ─────────────────────────────────────────────
+# 4b. NEW FIX: DROP BLANK/NONE/EMPTY SEVERITIES
+# ─────────────────────────────────────────────
+# This catches the 35 records that have no valid parsed severity string
+IS_BLANK_SEV = (df["severity_level"].isna()) | (df["severity_level"] == "") | (df["severity_level"].str.upper() == "NONE")
+blank_sev_count = IS_BLANK_SEV.sum()
+df = df[~IS_BLANK_SEV].reset_index(drop=True)
+print(f"[4b] Empty/None severities dropped: {blank_sev_count}")
+print(f"     Records remaining        : {len(df)}")
+
+# ─────────────────────────────────────────────
 # 5. BUILD CLEAN DATAFRAME
 # ─────────────────────────────────────────────
 FEATURE_COLS = [
@@ -241,7 +258,7 @@ for _, row in df_clean.iterrows():
 raw_xml   = ET.tostring(xml_root, encoding="unicode")
 pretty    = minidom.parseString(raw_xml).toprettyxml(indent="  ")
 lines     = pretty.splitlines()
-final_xml = "\n".join(lines[1:])  # drop minidom's own declaration
+final_xml = "\n".join(lines[1:])
 
 with open(OUT_PATH, "w", encoding="utf-8") as f:
     f.write('<?xml version="1.0" encoding="utf-8"?>\n')
