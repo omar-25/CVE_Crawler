@@ -53,32 +53,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2026-41318</cve_id>
-    <title>AnythingLLM vulnerable to stored DOM XSS in chart caption renderer - LLM-driven prompt injection produces executable HTML via unsanitized renderMarkdown(content.caption) in Chartable component</title>
-    <vendor>Mintplex-Labs</vendor>
-    <attack_type>Prompt Injection</attack_type>
-    <dates>
-      <published>2026-04-24</published>
-      <last_modified>2026-04-24</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score>5.4</score>
-      <severity_level>MEDIUM</severity_level>
-      <severity_numeric>2.0</severity_numeric>
-      <has_cvss>1</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>3</cwe_count>
-      <cwe_ids>CWE-79|CWE-116|CWE-1336</cwe_ids>
-      <cwe_names>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')|Improper Encoding or Escaping of Output|Improper Neutralization of Special Elements Used in a Template Engine</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>1097</length>
-      <text>AnythingLLM is an application that turns pieces of content into context that any LLM can use as references during chatting. Prior to version 1.12.1, AnythingLLM's in-chat markdown renderer has an unsafe custom rule for images that interpolates the markdown image's `alt` text into an HTML `alt="..."` attribute without any HTML encoding. Every call-site in the app wraps `renderMarkdown(...)` with `DOMPurify.sanitize(...)` as defense-in-depth — except the `Chartable` component, which renders chart captions with no sanitization. The chart caption is the natural-language text the LLM emits around a `create-chart` tool call, so any attacker who can influence the LLM's output — most cheaply via indirect prompt injection in a shared workspace document, or directly if they can create a chart record in a multi-user workspace — can trigger stored DOM-level XSS in every other user's browser when they open that conversation. AnythingLLM chat history is loaded server-side via `GET /api/workspace/:slug/chats` and rendered directly into the chat UI. Version 1.12.1 contains a patch for this issue.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2026-41271</cve_id>
     <title>Flowise: APIChain Prompt Injection SSRF in GET/POST API Chains</title>
     <vendor>FlowiseAI</vendor>
@@ -154,32 +128,6 @@
     <description_features>
       <length>536</length>
       <text>PraisonAIAgents is a multi-agent teams system. Prior to 1.5.128, read_skill_file() in skill_tools.py allows reading arbitrary files from the filesystem by accepting an unrestricted skill_path parameter. Unlike file_tools.read_file which enforces workspace boundary confinement, and unlike run_skill_script which requires critical-level approval, read_skill_file has neither protection. An agent influenced by prompt injection can exfiltrate sensitive files without triggering any approval prompt. This vulnerability is fixed in 1.5.128.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-40112</cve_id>
-    <title>PraisonAI has Stored XSS via Unsanitized Agent Output in HTML Rendering (nh3 Not a Required Dependency)</title>
-    <vendor>MervinPraison</vendor>
-    <attack_type>Prompt Injection</attack_type>
-    <dates>
-      <published>2026-04-09</published>
-      <last_modified>2026-04-09</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score>5.4</score>
-      <severity_level>MEDIUM</severity_level>
-      <severity_numeric>2.0</severity_numeric>
-      <has_cvss>1</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-79</cwe_ids>
-      <cwe_names>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>643</length>
-      <text>PraisonAI is a multi-agent teams system. Prior to 4.5.128, the Flask API endpoint in src/praisonai/api.py renders agent output as HTML without effective sanitization. The _sanitize_html function relies on the nh3 library, which is not listed as a required or optional dependency in pyproject.toml. When nh3 is absent (the default installation), the sanitizer is a no-op that returns HTML unchanged. An attacker who can influence agent input (via RAG data poisoning, web scraping results, or prompt injection) can inject arbitrary JavaScript that executes in the browser of anyone viewing the API output. This vulnerability is fixed in 4.5.128.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -313,32 +261,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2026-3456</cve_id>
-    <title>GeekyBot — Generate AI Content Without Prompt, Chatbot and Lead Generation &lt;= 1.2.0 - Unauthenticated SQL Injection via 'attributekey'</title>
-    <vendor>ahmadgb</vendor>
-    <attack_type>Prompt Injection</attack_type>
-    <dates>
-      <published>2026-05-05</published>
-      <last_modified>2026-05-05</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score>7.5</score>
-      <severity_level>HIGH</severity_level>
-      <severity_numeric>3.0</severity_numeric>
-      <has_cvss>1</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-89</cwe_ids>
-      <cwe_names>Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>510</length>
-      <text>The GeekyBot — Generate AI Content Without Prompt, Chatbot and Lead Generation plugin for WordPress is vulnerable to SQL Injection via the 'attributekey' parameter in versions up to, and including, 1.2.0 due to insufficient escaping on the user supplied parameter and lack of sufficient preparation on the existing SQL query. This makes it possible for unauthenticated attackers to append additional SQL queries into already existing queries that can be used to extract sensitive information from the database.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2026-34451</cve_id>
     <title>Claude SDK for TypeScript: Memory Tool Path Validation Allows Sandbox Escape to Sibling Directories</title>
     <vendor>anthropics</vendor>
@@ -440,32 +362,6 @@
     <description_features>
       <length>635</length>
       <text>nanobot is a personal AI assistant. Prior to version 0.1.6, an indirect prompt injection vulnerability exists in the email channel processing module (`nanobot/channels/email.py`), allowing a remote, unauthenticated attacker to execute arbitrary LLM instructions (and subsequently, system tools) without any interaction from the bot owner. By sending an email containing malicious prompts to the bot's monitored email address, the bot automatically polls, ingests, and processes the email content as highly trusted input, fully bypassing channel isolation and resulting in a stealthy, zero-click attack. Version 0.1.6 patches the issue.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-33060</cve_id>
-    <title>CKAN MCP Server: SSRF via base_url allows access to internal networks</title>
-    <vendor>ondata</vendor>
-    <attack_type>Prompt Injection</attack_type>
-    <dates>
-      <published>2026-03-20</published>
-      <last_modified>2026-03-20</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score>5.3</score>
-      <severity_level>MEDIUM</severity_level>
-      <severity_numeric>2.0</severity_numeric>
-      <has_cvss>1</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-918</cwe_ids>
-      <cwe_names>Server-Side Request Forgery (SSRF)</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>897</length>
-      <text>CKAN MCP Server is a tool for querying CKAN open data portals. Versions prior to 0.4.85 provide tools including ckan_package_search and sparql_query that accept a base_url parameter, making HTTP requests to arbitrary endpoints without restriction. A CKAN portal client has no legitimate reason to contact cloud metadata or internal network services. There is no URL validation on base_url parameter. No private IP blocking (RFC 1918, link-local 169.254.x.x), no cloud metadata blocking. The sparql_query and ckan_datastore_search_sql tools also accept arbitrary base URLs and expose injection surfaces. An attack can lead to internal network scanning, cloud metadata theft (IAM credentials via IMDS at 169.254.169.254), potential SQL/SPARQL injection via unsanitized query parameters. Attack requires prompt injection to control the base_url parameter. This issue has been fixed in version 0.4.85.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -804,84 +700,6 @@
     <description_features>
       <length>488</length>
       <text>OpenClaw (formerly Clawdbot) is a personal AI assistant users run on their own devices. In versions 2026.2.2 and below, when the Slack integration is enabled, channel metadata (topic/description) can be incorporated into the model's system prompt. Prompt injection is a documented risk for LLM-driven systems. This issue increases the injection surface by allowing untrusted Slack channel metadata to be treated as higher-trust system input. This issue has been fixed in version 2026.2.3.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-2256</cve_id>
-    <title>Command injection vulnerability in ModelScope's ms-agent</title>
-    <vendor>ModelScope</vendor>
-    <attack_type>Prompt Injection</attack_type>
-    <dates>
-      <published>2026-03-02</published>
-      <last_modified>2026-03-02</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>203</length>
-      <text>A command injection vulnerability in ModelScope's ms-agent versions v1.6.0rc1 and earlier exists, allowing an attacker to execute arbitrary operating system commands through crafted prompt-derived input.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2025-9959</cve_id>
-    <title>Sandbox escape in smolagents Local Python execution environment via dunder attributes</title>
-    <vendor>unknown</vendor>
-    <attack_type>Prompt Injection</attack_type>
-    <dates>
-      <published>2025-09-03</published>
-      <last_modified>2025-09-03</last_modified>
-    </dates>
-    <year>2025</year>
-    <cvss_features>
-      <score>7.6</score>
-      <severity_level>HIGH</severity_level>
-      <severity_numeric>3.0</severity_numeric>
-      <has_cvss>1</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-94</cwe_ids>
-      <cwe_names>Improper Control of Generation of Code ('Code Injection')</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>241</length>
-      <text>Incomplete validation of dunder attributes allows an attacker to escape from the Local Python execution environment sandbox, enforced by smolagents. The attack requires a Prompt Injection in order to trick the agent to create malicious code.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2025-9556</cve_id>
-    <title>CVE-2025-9556</title>
-    <vendor>Langchaingo</vendor>
-    <attack_type>Prompt Injection</attack_type>
-    <dates>
-      <published>2025-09-12</published>
-      <last_modified>2025-09-12</last_modified>
-    </dates>
-    <year>2025</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>350</length>
-      <text>Langchaingo supports the use of jinja2 syntax when parsing prompts, which is in turn parsed using the gonja library v1.5.3. Gonja supports include and extends syntax to read files, which leads to a server side template injection vulnerability within langchaingo, allowing an attacker to insert a statement into a prompt to read the "etc/passwd" file.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -1951,32 +1769,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2024-5565</cve_id>
-    <title>Prompt Injection in "ask" API with visualization leads to RCE</title>
-    <vendor>unknown</vendor>
-    <attack_type>Prompt Injection</attack_type>
-    <dates>
-      <published>2024-11-25</published>
-      <last_modified>2024-05-31</last_modified>
-    </dates>
-    <year>2024</year>
-    <cvss_features>
-      <score>8.1</score>
-      <severity_level>HIGH</severity_level>
-      <severity_numeric>3.0</severity_numeric>
-      <has_cvss>1</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-94</cwe_ids>
-      <cwe_names>Improper Control of Generation of Code ('Code Injection')</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>366</length>
-      <text>The Vanna library uses a prompt function to present the user with visualized results, it is possible to alter the prompt using prompt injection and run arbitrary Python code instead of the intended visualization code. Specifically - allowing external input to the library’s “ask” method with "visualize" set to True (default behavior) leads to remote code execution.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2024-5184</cve_id>
     <title>Prompt Injection in EmailGPT</title>
     <vendor>EmailGPT</vendor>
@@ -2208,32 +2000,6 @@
     <description_features>
       <length>323</length>
       <text>A vulnerability in the `default_jsonalyzer` function of the `JSONalyzeQueryEngine` in the run-llama/llama_index repository allows for SQL injection via prompt injection. This can lead to arbitrary file creation and Denial-of-Service (DoS) attacks. The vulnerability affects the latest version and is fixed in version 0.5.1.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2024-12366</cve_id>
-    <title>CVE-2024-12366</title>
-    <vendor>Sinaptik AI</vendor>
-    <attack_type>Prompt Injection</attack_type>
-    <dates>
-      <published>2025-02-11</published>
-      <last_modified>2025-02-11</last_modified>
-    </dates>
-    <year>2025</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>241</length>
-      <text>PandasAI uses an interactive prompt function that is vulnerable to prompt injection and run arbitrary Python code that can lead to Remote Code Execution (RCE) instead of the intended explanation of the natural language processing by the LLM.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -8737,32 +8503,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2026-4597</cve_id>
-    <title>648540858 wvp-GB28181-pro Stream Proxy Query StreamProxyProvider.java selectAll sql injection</title>
-    <vendor>Unknown</vendor>
-    <attack_type>Sql Injection</attack_type>
-    <dates>
-      <published>2026-04-18</published>
-      <last_modified>2026-03-23</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score>6.3</score>
-      <severity_level>MEDIUM</severity_level>
-      <severity_numeric>2.0</severity_numeric>
-      <has_cvss>1</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>2</cwe_count>
-      <cwe_ids>CWE-89|CWE-74</cwe_ids>
-      <cwe_names>SQL Injection|Injection</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>493</length>
-      <text>A security flaw has been discovered in 648540858 wvp-GB28181-pro up to 2.7.4. Impacted is the function selectAll of the file src/main/java/com/genersoft/iot/vmp/streamProxy/dao/provider/StreamProxyProvider.java of the component Stream Proxy Query Handler. The manipulation results in sql injection. The attack may be launched remotely. The exploit has been released to the public and may be used for attacks. The vendor was contacted early about this disclosure but did not respond in any way.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2026-4594</cve_id>
     <title>erupts erupt EruptJpaUtils.java geneEruptHqlOrderBy sql injection</title>
     <vendor>erupts</vendor>
@@ -10505,32 +10245,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2026-4079</cve_id>
-    <title>SQL Chart Builder &lt; 2.3.8 - Unauthenticated SQL Injection</title>
-    <vendor>Unknown</vendor>
-    <attack_type>Sql Injection</attack_type>
-    <dates>
-      <published>2026-04-07</published>
-      <last_modified>2026-04-07</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>231</length>
-      <text>The SQL Chart Builder WordPress plugin before 2.3.8 does not properly escape user input as it is concatened to SQL queries, making it possible for attackers to conduct SQL Injection attacks against the dynamic filter functionality.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2026-40745</cve_id>
     <title>WordPress Element Pack Elementor Addons plugin &lt;= 8.4.2 - SQL Injection vulnerability</title>
     <vendor>bdthemes</vendor>
@@ -11516,32 +11230,6 @@
     <description_features>
       <length>451</length>
       <text>Nefteprodukttekhnika BUK TS-G Gas Station Automation System 2.9.1 on Linux contains a SQL Injection vulnerability (CWE-89) in the system configuration module. A remote attacker can send specially crafted HTTP POST requests to the /php/request.php endpoint via the sql parameter in application/x-www-form-urlencoded data (e.g., action=do&amp;sql=&lt;query_here&gt;&amp;reload_driver=0) to execute arbitrary SQL commands and potentially achieve remote code execution.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-3830</cve_id>
-    <title>Product Filter for WooCommerce by WBW &lt; 3.1.3 - Unauthenticated SQLi</title>
-    <vendor>Unknown</vendor>
-    <attack_type>Sql Injection</attack_type>
-    <dates>
-      <published>2026-04-13</published>
-      <last_modified>2026-04-13</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>212</length>
-      <text>The Product Filter for WooCommerce by WBW WordPress plugin before 3.1.3 does not sanitize and escape a parameter before using it in a SQL statement, allowing unauthenticated users to perform SQL injection attacks</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -14090,84 +13778,6 @@
     <description_features>
       <length>640</length>
       <text>Kysely is a type-safe TypeScript SQL query builder. Prior to version 0.28.14, Kysely's `DefaultQueryCompiler.sanitizeStringLiteral()` only escapes single quotes by doubling them (`'` → `''`) but does not escape backslashes. When used with the MySQL dialect (where `NO_BACKSLASH_ESCAPES` is OFF by default), an attacker can use a backslash to escape the trailing quote of a string literal, breaking out of the string context and injecting arbitrary SQL. This affects any code path that uses `ImmediateValueTransformer` to inline values — specifically `CreateIndexBuilder.where()` and `CreateViewBuilder.as()`. Version 0.28.14 contains a fix.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-3346</cve_id>
-    <title>Stored Cross-Site Scripting (XSS) in Langflow Markdown Rendering via rehypeRaw</title>
-    <vendor>IBM</vendor>
-    <attack_type>Sql Injection</attack_type>
-    <dates>
-      <published>2026-04-30</published>
-      <last_modified>2026-04-30</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score>6.4</score>
-      <severity_level>MEDIUM</severity_level>
-      <severity_numeric>2.0</severity_numeric>
-      <has_cvss>1</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-89</cwe_ids>
-      <cwe_names>Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>304</length>
-      <text>IBM Langflow Desktop 1.6.0 through 1.8.4 Lanflow is vulnerable to stored cross-site scripting. This vulnerability allows an authenticated user to embed arbitrary JavaScript code in the Web UI thus altering the intended functionality potentially leading to credentials disclosure within a trusted session.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-33454</cve_id>
-    <title>Apache Camel: Inbound Header Filter Missing in MailHeaderFilterStrategy Allows Remote Code Execution via MIME Header Injection (CVE-2025-30177 Variant)</title>
-    <vendor>Apache Software Foundation</vendor>
-    <attack_type>Sql Injection</attack_type>
-    <dates>
-      <published>2026-04-27</published>
-      <last_modified>2026-04-27</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-502</cwe_ids>
-      <cwe_names>Deserialization of Untrusted Data</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>1312</length>
-      <text>The Camel-Mail component is vulnerable to Camel message header injection. The custom header filter strategy used by the component (MailHeaderFilterStrategy) only filters the 'out' direction via setOutFilterStartsWith, while it does not configure the 'in' direction via setInFilterStartsWith. As a result, when a Camel application consumes mail through camel-mail (for example via from(\"imap://...\") or from(\"pop3://...\")) the inbound filter check is skipped and Camel-prefixed MIME headers are mapped unfiltered into the Exchange. An attacker who can deliver an email to a mailbox monitored by such a consumer can inject Camel-specific headers that, for some Camel components downstream of the mail consumer (such as camel-bean, camel-exec, or camel-sql), can alter the behaviour of the route. This is the same pattern that was previously addressed in camel-undertow (CVE-2025-30177) and the broader incoming-header filter (CVE-2025-27636 and CVE-2025-29891). This issue affects Apache Camel: from 3.0.0 before 4.14.6, from 4.15.0 before 4.18.1. Users are recommended to upgrade to version 4.19.0, which fixes the issue. If users are on the 4.18.x LTS releases stream, then they are suggested to upgrade to 4.18.1. If users are on the 4.14.x LTS releases stream, then they are suggested to upgrade to 4.14.6.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-33453</cve_id>
-    <title>Apache Camel: CoAP URI Query Parameter to Exchange Header Injection in camel-coap Allows Single-Packet Pre-Auth Remote Code Execution</title>
-    <vendor>Apache Software Foundation</vendor>
-    <attack_type>Sql Injection</attack_type>
-    <dates>
-      <published>2026-04-27</published>
-      <last_modified>2026-04-27</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-915</cwe_ids>
-      <cwe_names>Improperly Controlled Modification of Dynamically-Determined Object Attributes</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>2414</length>
-      <text>Improperly Controlled Modification of Dynamically-Determined Object Attributes vulnerability in Apache Camel Camel-Coap component. Apache Camel's camel-coap component is vulnerable to Camel message header injection, leading to remote code execution when routes forward CoAP requests to header-sensitive producers (e.g. camel-exec) The camel-coap component maps incoming CoAP request URI query parameters directly into Camel Exchange In message headers without applying any HeaderFilterStrategy.   Specifically, CamelCoapResource.handleRequest() iterates over OptionSet.getUriQuery() and calls camelExchange.getIn().setHeader(...) for every query parameter. CoAPEndpoint extends DefaultEndpoint rather than DefaultHeaderFilterStrategyEndpoint, and CoAPComponent does not implement HeaderFilterStrategyComponent; the component contains no references to HeaderFilterStrategy at all. As a result, an unauthenticated attacker who can send a single CoAP UDP packet to a Camel route consuming from coap:// can inject arbitrary Camel internal headers (those prefixed with Camel*) into the Exchange. When the route delivers the message to a header-sensitive producer such as camel-exec, camel-sql, camel-bean, camel-file, or template components (camel-freemarker, camel-velocity), the injected headers can alter the producer's behavior. In the case of camel-exec, the CamelExecCommandExecutable and CamelExecCommandArgs headers override the executable and arguments configured on the endpoint, resulting in arbitrary OS command execution under the privileges of the Camel process. The producer's output is written back to the Exchange body and returned in the CoAP response payload by CamelCoapResource, giving the attacker an interactive RCE channel without any need for out-of-band exfiltration.                                                                                                                                                                         Exploitation prerequisites are minimal: a single unauthenticated UDP datagram to the CoAP port (default 5683). CoAP (RFC 7252) has no built-in authentication, and DTLS is optional and disabled by default. Because the protocol is UDP-based, HTTP-layer WAF/IDS controls do not apply. This issue affects Apache Camel: from 4.14.0 through 4.14.5, from 4.18.0 before 4.18.1, 4.19.0. Users are recommended to upgrade to version 4.18.1 or 4.19.0, fixing the issue.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -17551,32 +17161,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2026-27847</cve_id>
-    <title>Missing authentication in Linksys MR9600, Linksys MX4200</title>
-    <vendor>Linksys</vendor>
-    <attack_type>Sql Injection</attack_type>
-    <dates>
-      <published>2026-02-25</published>
-      <last_modified>2026-02-25</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-89</cwe_ids>
-      <cwe_names>Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>343</length>
-      <text>Due to improper neutralization of special elements, SQL statements can be injected via the handshake of a TLS-SRP connection. This can be used to inject known credentials into the database that can be utilized to successfully complete the handshake and use the protected service. This issue affects MR9600: 1.0.4.205530; MX4200: 1.0.13.210200.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2026-27834</cve_id>
     <title>Piwigo: SQL Injection in pwg.users.getList API Method via filter Parameter</title>
     <vendor>Piwigo</vendor>
@@ -20619,32 +20203,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2026-6779</cve_id>
-    <title>Other issue in the JavaScript Engine component</title>
-    <vendor>Mozilla</vendor>
-    <attack_type>Cross-Site Scripting</attack_type>
-    <dates>
-      <published>2026-04-21</published>
-      <last_modified>2026-04-21</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>112</length>
-      <text>Other issue in the JavaScript Engine component. This vulnerability was fixed in Firefox 150 and Thunderbird 150.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2026-6745</cve_id>
     <title>Bagisto Custom Scripts cross site scripting</title>
     <vendor>n/a</vendor>
@@ -22101,32 +21659,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2026-5754</cve_id>
-    <title>Radware Alteon has a reflected XSS vulnerability</title>
-    <vendor>Radware</vendor>
-    <attack_type>Cross-Site Scripting</attack_type>
-    <dates>
-      <published>2026-04-14</published>
-      <last_modified>2026-04-14</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>249</length>
-      <text>Reflected Cross-Site Scripting (XSS) Vulnerability in Radware Alteon 34.5.4.0 vADC load-balancer allows an attacker to inject malicious scripts into the website, potentially leading to unauthorized actions, data theft, or other malicious activities.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2026-5748</cve_id>
     <title>Text Snippets &lt;= 0.0.1 - Authenticated (Contributor+) Stored Cross-Site Scripting via 'w' Shortcode Attribute</title>
     <vendor>snedled</vendor>
@@ -22904,32 +22436,6 @@
     <description_features>
       <length>325</length>
       <text>A security vulnerability has been detected in itsourcecode Payroll Management System up to 1.0. Affected is an unknown function of the file /navbar.php. Such manipulation of the argument page leads to cross site scripting. It is possible to launch the attack remotely. The exploit has been disclosed publicly and may be used.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-5306</cve_id>
-    <title>Check &amp; Log Email &lt; 2.0.13 - Unauthenticated Stored XSS</title>
-    <vendor>Unknown</vendor>
-    <attack_type>Cross-Site Scripting</attack_type>
-    <dates>
-      <published>2026-04-28</published>
-      <last_modified>2026-04-28</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>208</length>
-      <text>The Check &amp; Log Email WordPress plugin before 2.0.13 does not properly handle email replacement, which could allow unauthenticated users to perform Stored XSS attacks when the email encoder setting is enabled</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -24620,32 +24126,6 @@
     <description_features>
       <length>459</length>
       <text>A vulnerability was determined in Wavlink WL-WN578W2 221110. This affects an unknown function of the file /cgi-bin/login.cgi of the component POST Request Handler. Executing a manipulation of the argument homepage/hostname/login_page can lead to cross site scripting. It is possible to launch the attack remotely. The exploit has been publicly disclosed and may be utilized. The vendor was contacted early about this disclosure but did not respond in any way.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-4512</cve_id>
-    <title>WP reCaptcha by WebDesignBy &lt; 2.0 – Admin+ Stored XSS</title>
-    <vendor>Unknown</vendor>
-    <attack_type>Cross-Site Scripting</attack_type>
-    <dates>
-      <published>2026-04-23</published>
-      <last_modified>2026-04-23</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>385</length>
-      <text>The reCaptcha by WebDesignBy WordPress plugin before 2.0 does not sanitize or escape the Site Key setting before outputting it in a JavaScript string context via the grecaptcha_js() function. This allows administrators on multisite installations (who do not have the unfiltered_html capability) to inject arbitrary JavaScript that executes for all visitors to the WordPress login page.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -26495,32 +25975,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2026-41043</cve_id>
-    <title>Apache ActiveMQ, Apache ActiveMQ Web: ActiveMQ Web Console - XSS vulnerability when browsing queues</title>
-    <vendor>Apache Software Foundation</vendor>
-    <attack_type>Cross-Site Scripting</attack_type>
-    <dates>
-      <published>2026-04-24</published>
-      <last_modified>2026-04-24</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>2</cwe_count>
-      <cwe_ids>CWE-79|CWE-915</cwe_ids>
-      <cwe_names>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')|Improperly Controlled Modification of Dynamically-Determined Object Attributes</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>554</length>
-      <text>Improper Neutralization of Script-Related HTML Tags in a Web Page (Basic XSS) vulnerability in Apache ActiveMQ, Apache ActiveMQ Web. An authenticated attacker can show malicious content when browsing queues in the web console by overriding the content type to be HTML (instead of XML) and by injecting HTML into a JMS selector field. This issue affects Apache ActiveMQ: before 5.19.6, from 6.0.0 before 6.2.5; Apache ActiveMQ Web: before 5.19.6, from 6.0.0 before 6.2.5. Users are recommended to upgrade to version 6.2.5 or 5.19.6, which fixes the issue.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2026-40927</cve_id>
     <title>Docmost: XSS in Comments with JavaScript URI</title>
     <vendor>docmost</vendor>
@@ -27246,58 +26700,6 @@
     <description_features>
       <length>641</length>
       <text>Kimai is an open-source time tracking application. In versions 1.16.3 through 2.52.0, the escapeForHtml() function in KimaiEscape.js does not escape double quote or single quote characters. When a user's profile alias is inserted into an HTML attribute context via the team member form prototype and rendered through innerHTML, this incomplete escaping allows HTML attribute injection. An authenticated user with ROLE_USER privileges can store a malicious alias that executes JavaScript in the browser of any administrator viewing the team form, resulting in stored XSS with privilege escalation. This issue has been fixed in version 2.53.0.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-40472</cve_id>
-    <title>Hackage package metadata stored XSS vulnerability</title>
-    <vendor>unknown</vendor>
-    <attack_type>Cross-Site Scripting</attack_type>
-    <dates>
-      <published>2026-04-23</published>
-      <last_modified>2026-04-23</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score>9.9</score>
-      <severity_level>CRITICAL</severity_level>
-      <severity_numeric>4.0</severity_numeric>
-      <has_cvss>1</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-79</cwe_ids>
-      <cwe_names>Improper neutralization of input during web page generation ('cross-site scripting')</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>181</length>
-      <text>In hackage-server, user-controlled metadata from .cabal files are rendered into HTML href attributes without proper sanitization, enabling stored Cross-Site Scripting (XSS) attacks.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-40470</cve_id>
-    <title>Hackage package and doc upload stored XSS vulnerability</title>
-    <vendor>unknown</vendor>
-    <attack_type>Cross-Site Scripting</attack_type>
-    <dates>
-      <published>2026-04-23</published>
-      <last_modified>2026-04-23</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score>9.9</score>
-      <severity_level>CRITICAL</severity_level>
-      <severity_numeric>4.0</severity_numeric>
-      <has_cvss>1</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-79</cwe_ids>
-      <cwe_names>Improper neutralization of input during web page generation ('cross-site scripting')</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>549</length>
-      <text>A critical XSS vulnerability affected hackage-server and hackage.haskell.org. HTML and JavaScript files provided in source packages or via the documentation upload facility were served as-is on the main hackage.haskell.org domain. As a consequence, when a user with latent HTTP credentials browses to the package pages or documentation uploaded by a malicious package maintainer, their session can be hijacked to upload packages or documentation, amend maintainers or other package metadata, or perform any other action the user is authorised to do.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -30447,32 +29849,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2026-35565</cve_id>
-    <title>Apache Storm UI: Stored Cross-Site Scripting (XSS) via Unsanitized Topology Metadata in Storm UI</title>
-    <vendor>Apache Software Foundation</vendor>
-    <attack_type>Cross-Site Scripting</attack_type>
-    <dates>
-      <published>2026-04-13</published>
-      <last_modified>2026-04-13</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-79</cwe_ids>
-      <cwe_names>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>1529</length>
-      <text>Stored Cross-Site Scripting (XSS) via Unsanitized Topology Metadata in Apache Storm UI Versions Affected: before 2.8.6 Description: The Storm UI visualization component interpolates topology metadata including component IDs, stream names, and grouping values directly into HTML via innerHTML in parseNode() and parseEdge() without sanitization at any layer. An authenticated user with topology submission rights could craft a topology containing malicious HTML/JavaScript in component identifiers (e.g., a bolt ID containing an onerror event handler). This payload flows through Nimbus → Thrift → the Visualization API → vis.js tooltip rendering, resulting in stored cross-site scripting.  In multi-tenant deployments where topology submission is available to less-trusted users but the UI is accessed by operators or administrators, this enables privilege escalation through script execution in an admin's browser session. Mitigation: 2.x users should upgrade to 2.8.6. Users who cannot upgrade immediately should monkey-patch the parseNode() and parseEdge() functions in the visualization JavaScript file to HTML-escape all API-supplied values including nodeId, :capacity, :latency, :component, :stream, and :grouping before interpolation into tooltip HTML strings, and should additionally restrict topology submission to trusted users via Nimbus ACLs as a defense-in-depth measure. A guide on how to do this is available in the release notes of 2.8.6. Credit: This issue was discovered while investigating another report by K.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2026-3554</cve_id>
     <title>Sherk Custom Post Type Displays &lt;= 1.2.1 - Authenticated (Contributor+) Stored Cross-Site Scripting via 'title' Shortcode Attribute</title>
     <vendor>sherkspear</vendor>
@@ -30548,32 +29924,6 @@
     <description_features>
       <length>921</length>
       <text>The Custom New User Notification plugin for WordPress is vulnerable to Stored Cross-Site Scripting via the plugin's admin settings in all versions up to, and including, 1.2.0. This is due to insufficient input sanitization and output escaping on multiple settings fields including 'User Mail Subject', 'User From Name', 'User From Email', 'Admin Mail Subject', 'Admin From Name', and 'Admin From Email'. The settings are registered via register_setting() without sanitize callbacks, and the values retrieved via get_option() are echoed directly into HTML input value attributes without esc_attr(). This makes it possible for authenticated attackers, with Administrator-level access and above, to inject arbitrary web scripts in the plugin settings page that will execute whenever a user accesses that page. This could be used in multi-site installations where administrators of subsites could target super administrators.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-35466</cve_id>
-    <title>Stored XSS via unsanitized input from remote service</title>
-    <vendor>CERT/CC</vendor>
-    <attack_type>Cross-Site Scripting</attack_type>
-    <dates>
-      <published>2026-04-02</published>
-      <last_modified>2026-04-02</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-79</cwe_ids>
-      <cwe_names>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>135</length>
-      <text>XSS vulnerability in cveInterface.js allows for inject HTML to be passed to display, as cveInterface trusts input from CVE API services</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -37233,58 +36583,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2026-3218</cve_id>
-    <title>Responsive Favicons - Moderately critical - Cross-site scripting - SA-CONTRIB-2026-019</title>
-    <vendor>Drupal</vendor>
-    <attack_type>Cross-Site Scripting</attack_type>
-    <dates>
-      <published>2026-03-25</published>
-      <last_modified>2026-03-25</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-79</cwe_ids>
-      <cwe_names>Improper Neutralization of Input During Web Page Generation ("Cross-site Scripting")</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>227</length>
-      <text>Improper Neutralization of Input During Web Page Generation ("Cross-site Scripting") vulnerability in Drupal Responsive Favicons allows Cross-Site Scripting (XSS).This issue affects Responsive Favicons: from 0.0.0 before 2.0.2.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-3215</cve_id>
-    <title>Islandora - Moderately critical - Arbitrary file upload, Cross-site scripting - SA-CONTRIB-2026-016</title>
-    <vendor>Drupal</vendor>
-    <attack_type>Cross-Site Scripting</attack_type>
-    <dates>
-      <published>2026-03-25</published>
-      <last_modified>2026-03-25</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-79</cwe_ids>
-      <cwe_names>Improper Neutralization of Input During Web Page Generation ("Cross-site Scripting")</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>208</length>
-      <text>Improper Neutralization of Input During Web Page Generation ("Cross-site Scripting") vulnerability in Drupal Islandora allows Cross-Site Scripting (XSS).This issue affects Islandora: from 0.0.0 before 2.17.5.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2026-32139</cve_id>
     <title>Dataease: Unfiltered active SVG content leads to Stored XSS</title>
     <vendor>dataease</vendor>
@@ -37308,32 +36606,6 @@
     <description_features>
       <length>587</length>
       <text>Dataease is an open source data visualization analysis tool. In DataEase 2.10.19 and earlier, the static resource upload interface allows SVG uploads. However, backend validation only checks whether the XML is parseable and whether the root node is svg. It does not sanitize active content such as onload/onerror event handlers or script-capable attributes. As a result, an attacker can upload a malicious SVG and then trigger script execution in a browser by visiting the exposed static resource URL, forming a full stored XSS exploitation chain. This vulnerability is fixed in 2.10.20.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-3213</cve_id>
-    <title>Anti-Spam by CleanTalk - Moderately critical - Cross-site scripting - SA-CONTRIB-2026-014</title>
-    <vendor>Drupal</vendor>
-    <attack_type>Cross-Site Scripting</attack_type>
-    <dates>
-      <published>2026-03-25</published>
-      <last_modified>2026-03-25</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-79</cwe_ids>
-      <cwe_names>Improper Neutralization of Input During Web Page Generation ("Cross-site Scripting")</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>233</length>
-      <text>Improper Neutralization of Input During Web Page Generation ("Cross-site Scripting") vulnerability in Drupal Anti-Spam by CleanTalk allows Cross-Site Scripting (XSS).This issue affects Anti-Spam by CleanTalk: from 0.0.0 before 9.7.0.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -37568,32 +36840,6 @@
     <description_features>
       <length>447</length>
       <text>Notesnook is a note-taking app focused on user privacy &amp; ease of use. Prior to 3.3.9, a Stored Cross-Site Scripting (XSS) vulnerability existed in Notesnook's editor embed component when rendering Twitter/X embed URLs. The tweetToEmbed() function in component.tsx interpolated the user-supplied URL directly into an HTML string without escaping, which was then assigned to the srcdoc attribute of an &lt;iframe&gt;. This vulnerability is fixed in 3.3.9.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-31873</cve_id>
-    <title>Unhead has a Bypass of URI Scheme Sanitization in makeTagSafe via Case-Sensitivity</title>
-    <vendor>unjs</vendor>
-    <attack_type>Cross-Site Scripting</attack_type>
-    <dates>
-      <published>2026-03-12</published>
-      <last_modified>2026-03-12</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score>0.0</score>
-      <severity_level>NONE</severity_level>
-      <severity_numeric/>
-      <has_cvss>1</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-79</cwe_ids>
-      <cwe_names>Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>496</length>
-      <text>Unhead is a document head and template manager. Prior to 2.1.11, The link.href check in makeTagSafe (safe.ts) uses String.includes(), which is case-sensitive. Browsers treat URI schemes case-insensitively. DATA:text/css,... is the same as data:text/css,... to the browser, but 'DATA:...'.includes('data:') returns false. An attacker can inject arbitrary CSS for UI redressing or data exfiltration via CSS attribute selectors with background-image callbacks. This vulnerability is fixed in 2.1.11.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -38533,32 +37779,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2026-7321</cve_id>
-    <title>Sandbox escape due to incorrect boundary conditions in the WebRTC: Networking component</title>
-    <vendor>Mozilla</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-30</published>
-      <last_modified>2026-04-28</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>198</length>
-      <text>Sandbox escape due to incorrect boundary conditions in the WebRTC: Networking component. This vulnerability was fixed in Firefox 150, Thunderbird 150, Firefox ESR 140.10.1, and Thunderbird 140.10.1.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2026-7289</cve_id>
     <title>D-Link DIR-825M formWanConfigSetup sub_414BA8 buffer overflow</title>
     <vendor>D-Link</vendor>
@@ -38608,32 +37828,6 @@
     <description_features>
       <length>327</length>
       <text>A vulnerability has been found in D-Link DIR-825M 1.1.12. This vulnerability affects the function sub_4151FC of the file /boafrm/formVpnConfigSetup. The manipulation of the argument submit-url leads to buffer overflow. Remote exploitation of the attack is possible. The exploit has been disclosed to the public and may be used.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-7270</cve_id>
-    <title>Local privilege escalation via execve()</title>
-    <vendor>FreeBSD</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-30</published>
-      <last_modified>2026-04-30</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-783</cwe_ids>
-      <cwe_names>Operator Precedence Logic Error</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>251</length>
-      <text>An operator precedence bug in the kernel results in a scenario where a buffer overflow causes attacker-controlled data to overwrite adjacent execve(2) argument buffers. The bug may be exploitable by an unprivileged user to obtain superuser privileges.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -39232,32 +38426,6 @@
     <description_features>
       <length>344</length>
       <text>A security flaw has been discovered in Tenda F456 1.0.0.5. This affects the function frmL7ProtForm of the file /goform/L7Prot of the component httpd. Performing a manipulation of the argument page results in buffer overflow. Remote exploitation of the attack is possible. The exploit has been released to the public and may be used for attacks.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-7040</cve_id>
-    <title>Text::Minify::XS versions from 0.3.0 before 0.7.8 for Perl have heap overflow when processing some malformed UTF-8 characters</title>
-    <vendor>RRWO</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-05-01</published>
-      <last_modified>2026-04-27</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>2</cwe_count>
-      <cwe_ids>CWE-176|CWE-122</cwe_ids>
-      <cwe_names>Improper Handling of Unicode Encoding|Heap-based Buffer Overflow</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>280</length>
-      <text>Text::Minify::XS versions from 0.3.0 before 0.7.8 for Perl have a heap overflow when processing some malformed UTF-8 characters. The minify functions mishandled some malformed UTF-8 characters, leading to heap corruption. Note that the minify_utf8 function is an alias for minify.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -40379,58 +39547,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2026-6069</cve_id>
-    <title>CVE-2026-6069</title>
-    <vendor>NASM</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-10</published>
-      <last_modified>2026-04-10</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>191</length>
-      <text>NASM’s disasm() function contains a stack based buffer overflow when formatting disassembly output, allowing an attacker triggered out-of-bounds write when `slen` exceeds the buffer capacity.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-6067</cve_id>
-    <title>CVE-2026-6067</title>
-    <vendor>NASM</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-10</published>
-      <last_modified>2026-04-10</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>325</length>
-      <text>A heap buffer overflow vulnerability exists in the Netwide Assembler (NASM) due to a lack of bounds checking in the obj_directive() function. This vulnerability can be exploited by a user assembling a malicious .asm file, potentially leading to heap memory corruption, denial of service (crash), and arbitrary code execution.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2026-6016</cve_id>
     <title>Tenda AC9 POST Request WizardHandle decodePwd stack-based overflow</title>
     <vendor>Tenda</vendor>
@@ -40896,32 +40012,6 @@
     <description_features>
       <length>361</length>
       <text>A vulnerability was detected in D-Link DIR-645 1.01/1.02/1.03. Impacted is the function hedwigcgi_main of the file /cgi-bin/hedwig.cgi. The manipulation results in stack-based buffer overflow. The attack can be launched remotely. The exploit is now public and may be used. This vulnerability only affects products that are no longer supported by the maintainer.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-5734</cve_id>
-    <title>Memory safety bugs fixed in Firefox ESR 140.9.1, Thunderbird ESR 140.9.1, Firefox 149.0.2 and Thunderbird 149.0.2</title>
-    <vendor>Mozilla</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-13</published>
-      <last_modified>2026-04-07</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>390</length>
-      <text>Memory safety bugs present in Firefox ESR 140.9.0, Thunderbird ESR 140.9.0, Firefox 149.0.1 and Thunderbird 149.0.1. Some of these bugs showed evidence of memory corruption and we presume that with enough effort some of these could have been exploited to run arbitrary code. This vulnerability was fixed in Firefox 149.0.2, Firefox ESR 140.9.1, Thunderbird 149.0.2, and Thunderbird 140.9.1.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -41627,32 +40717,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2026-5450</cve_id>
-    <title>scanf %mc off-by-one heap buffer overflow</title>
-    <vendor>The GNU C Library</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-20</published>
-      <last_modified>2026-04-20</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-122</cwe_ids>
-      <cwe_names>Heap-based buffer overflow</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>244</length>
-      <text>Calling the scanf family of functions with a %mc (malloc'd character match) in the GNU C Library version 2.7 to version 2.43 with a format width specifier with an explicit width greater than 1024 could result in a one byte heap buffer overflow.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2026-5448</cve_id>
     <title>1-2 Byte Buffer Overflow in wolfSSL_X509_notAfter/notBefore</title>
     <vendor>wolfSSL</vendor>
@@ -41702,110 +40766,6 @@
     <description_features>
       <length>229</length>
       <text>Heap buffer overflow in CertFromX509 via AuthorityKeyIdentifier size confusion. A heap buffer overflow occurs when converting an X.509 certificate internally due to incorrect size handling of the AuthorityKeyIdentifier extension.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-5444</cve_id>
-    <title>Heap Buffer Overflow in PAM Image Buffer Allocation</title>
-    <vendor>Orthanc</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-09</published>
-      <last_modified>2026-04-09</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>409</length>
-      <text>A heap buffer overflow vulnerability exists in the PAM image parsing logic. When Orthanc processes a crafted PAM image embedded in a DICOM file, image dimensions are multiplied using 32-bit unsigned arithmetic. Specially chosen values can cause an integer overflow during buffer size calculation, resulting in the allocation of a small buffer followed by a much larger write operation during pixel processing.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-5443</cve_id>
-    <title>Heap Buffer Overflow in DICOM Image Decoder (Palette Color Decode)</title>
-    <vendor>Orthanc</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-09</published>
-      <last_modified>2026-04-09</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>326</length>
-      <text>A heap buffer overflow vulnerability exists during the decoding of `PALETTE COLOR` DICOM images. Pixel length validation uses 32-bit multiplication for width and height calculations. If these values overflow, the validation check incorrectly succeeds, allowing the decoder to read and write to memory beyond allocated buffers.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-5442</cve_id>
-    <title>Heap Buffer Overflow in DICOM Image Decoder via VR UL Dimensions</title>
-    <vendor>Orthanc</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-09</published>
-      <last_modified>2026-04-09</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>385</length>
-      <text>A heap buffer overflow vulnerability exists in the DICOM image decoder. Dimension fields are encoded using Value Representation (VR) Unsigned Long (UL), instead of the expected VR Unsigned Short (US), which allows extremely large dimensions to be processed. This causes an integer overflow during frame size calculation and results in out-of-bounds memory access during image decoding.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-5435</cve_id>
-    <title>Potential buffer overflow in ns_sprintrrf TSIG handling path</title>
-    <vendor>The GNU C Library</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-28</published>
-      <last_modified>2026-04-28</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-787</cwe_ids>
-      <cwe_names>Out-of-bounds write</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>225</length>
-      <text>The deprecated functions ns_printrrf, ns_printrr and fp_nquery in the GNU C Library version 2.2 and newer fail to enforce the caller-supplied buffer length, and can result in an out-of-bounds write when printing TSIG records.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -43031,32 +41991,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2026-4747</cve_id>
-    <title>Remote code execution via RPCSEC_GSS packet validation</title>
-    <vendor>FreeBSD</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-03-26</published>
-      <last_modified>2026-03-26</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-121</cwe_ids>
-      <cwe_names>Stack-based Buffer Overflow</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>804</length>
-      <text>Each RPCSEC_GSS data packet is validated by a routine which checks a signature in the packet. This routine copies a portion of the packet into a stack buffer, but fails to ensure that the buffer is sufficiently large, and a malicious client can trigger a stack overflow. Notably, this does not require the client to authenticate itself first. As kgssapi.ko's RPCSEC_GSS implementation is vulnerable, remote code execution in the kernel is possible by an authenticated user that is able to send packets to the kernel's NFS server while kgssapi.ko is loaded into the kernel. In userspace, applications which have librpcgss_sec loaded and run an RPC server are vulnerable to remote code execution from any client able to send it packets. We are not aware of any such applications in the FreeBSD base system.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2026-4744</cve_id>
     <title>Notepad3 Bundled Oniguruma compile_string_node() Heap Buffer Overflow via Crafted Regex Pattern Allows Arbitrary Code Execution</title>
     <vendor>rizonesoft</vendor>
@@ -43106,84 +42040,6 @@
     <description_features>
       <length>279</length>
       <text>Improper Restriction of Operations within the Bounds of a Memory Buffer vulnerability in yoyofr modizer (libs/libopenmpt/openmpt-trunk/include/premake/contrib/curl/lib modules). This vulnerability is associated with program files imap.C‎. This issue affects modizer: before v4.3.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-4729</cve_id>
-    <title>Memory safety bugs fixed in Firefox 149 and Thunderbird 149</title>
-    <vendor>Mozilla</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-13</published>
-      <last_modified>2026-03-24</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>285</length>
-      <text>Memory safety bugs present in Firefox 148 and Thunderbird 148. Some of these bugs showed evidence of memory corruption and we presume that with enough effort some of these could have been exploited to run arbitrary code. This vulnerability was fixed in Firefox 149 and Thunderbird 149.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-4721</cve_id>
-    <title>Memory safety bugs fixed in Firefox ESR 115.34, Firefox ESR 140.9, Thunderbird ESR 140.9, Firefox 149 and Thunderbird 149</title>
-    <vendor>Mozilla</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-13</published>
-      <last_modified>2026-03-24</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>406</length>
-      <text>Memory safety bugs present in Firefox ESR 115.33, Firefox ESR 140.8, Thunderbird ESR 140.8, Firefox 148 and Thunderbird 148. Some of these bugs showed evidence of memory corruption and we presume that with enough effort some of these could have been exploited to run arbitrary code. This vulnerability was fixed in Firefox 149, Firefox ESR 115.34, Firefox ESR 140.9, Thunderbird 149, and Thunderbird 140.9.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-4720</cve_id>
-    <title>Memory safety bugs fixed in Firefox ESR 140.9, Thunderbird ESR 140.9, Firefox 149 and Thunderbird 149</title>
-    <vendor>Mozilla</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-13</published>
-      <last_modified>2026-03-24</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>366</length>
-      <text>Memory safety bugs present in Firefox ESR 140.8, Thunderbird ESR 140.8, Firefox 148 and Thunderbird 148. Some of these bugs showed evidence of memory corruption and we presume that with enough effort some of these could have been exploited to run arbitrary code. This vulnerability was fixed in Firefox 149, Firefox ESR 140.9, Thunderbird 149, and Thunderbird 140.9.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -43629,32 +42485,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2026-43020</cve_id>
-    <title>Bluetooth: MGMT: validate LTK enc_size on load</title>
-    <vendor>Linux</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-05-01</published>
-      <last_modified>2026-05-01</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>476</length>
-      <text>In the Linux kernel, the following vulnerability has been resolved: Bluetooth: MGMT: validate LTK enc_size on load Load Long Term Keys stores the user-provided enc_size and later uses it to size fixed-size stack operations when replying to LE LTK requests. An enc_size larger than the 16-byte key buffer can therefore overflow the reply stack buffer. Reject oversized enc_size values while validating the management LTK record so invalid keys never reach the stored key state.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2026-4254</cve_id>
     <title>Tenda AC8 HTTP Endpoint SysToolChangePwd doSystemCmd stack-based overflow</title>
     <vendor>Tenda</vendor>
@@ -43678,32 +42508,6 @@
     <description_features>
       <length>381</length>
       <text>A weakness has been identified in Tenda AC8 up to 16.03.50.11. This vulnerability affects the function doSystemCmd of the file /goform/SysToolChangePwd of the component HTTP Endpoint. This manipulation of the argument local_2c causes stack-based buffer overflow. The attack can be initiated remotely. The exploit has been made available to the public and could be used for attacks.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-42512</cve_id>
-    <title>Remotely triggerable out-of-bounds heap write in dhclient</title>
-    <vendor>FreeBSD</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-30</published>
-      <last_modified>2026-04-30</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-122</cwe_ids>
-      <cwe_names>Heap-based Buffer Overflow</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>445</length>
-      <text>As dhclient is building an environment to pass to dhclient-script, it may need to resize the array of string pointers. The code which expands the array incorrectly calculates its new size when requesting memory, resulting in a heap buffer overrun. A specially crafted packet can cause dhclient to overrun its buffer of environment entries. This can result in a crash, but it may be possible to leverage this bug to achieve remote code execution.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -44120,32 +42924,6 @@
     <description_features>
       <length>467</length>
       <text>A security flaw has been discovered in D-Link DIR-816 1.10CNB05. This affects an unknown function of the file /goform/form2RepeaterStep2.cgi of the component goahead. The manipulation of the argument key1/key2/key3/key4/pskValue results in stack-based buffer overflow. The attack may be launched remotely. The exploit has been released to the public and may be used for attacks. This vulnerability only affects products that are no longer supported by the maintainer.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-4177</cve_id>
-    <title>YAML::Syck versions through 1.36 for Perl has several potential security vulnerabilities including a high-severity heap buffer overflow in the YAML emitter</title>
-    <vendor>TODDR</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-03-16</published>
-      <last_modified>2026-03-16</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-122</cwe_ids>
-      <cwe_names>Heap-based Buffer Overflow</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>516</length>
-      <text>YAML::Syck versions through 1.36 for Perl has several potential security vulnerabilities including a high-severity heap buffer overflow in the YAML emitter. The heap overflow occurs when class names exceed the initial 512-byte allocation. The base64 decoder could read past the buffer end on trailing newlines. strtok mutated n-&gt;type_id in place, corrupting shared node data. A memory leak occurred in syck_hdlr_add_anchor when a node already had an anchor. The incoming anchor string 'a' was leaked on early return.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
@@ -45371,58 +44149,6 @@
     </description_features>
   </vulnerability>
   <vulnerability>
-    <cve_id>CVE-2026-39457</cve_id>
-    <title>Stack overflow via select() file descriptor set overflow</title>
-    <vendor>FreeBSD</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-30</published>
-      <last_modified>2026-04-30</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>1</cwe_count>
-      <cwe_ids>CWE-121</cwe_ids>
-      <cwe_names>Stack-based Buffer Overflow</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>545</length>
-      <text>When exchanging data over a socket, libnv uses select(2) to wait for data to arrive. However, it does not verify whether the provided socket descriptor fits in select(2)'s file descriptor set size limit of FD_SETSIZE (1024). An attacker who is able to force a libnv application to allocate large file descriptors, e.g., by opening many descriptors and executing a program which is not careful to close them upon startup, can trigger stack corruption. If the target application is setuid-root, then this could be used to elevate local privileges.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-3845</cve_id>
-    <title>Heap buffer overflow in the Audio/Video: Playback component in Firefox for Android</title>
-    <vendor>Mozilla</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-13</published>
-      <last_modified>2026-03-10</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>0</cwe_count>
-      <cwe_ids/>
-      <cwe_names/>
-    </cwe_features>
-    <description_features>
-      <length>132</length>
-      <text>Heap buffer overflow in the Audio/Video: Playback component in Firefox for Android. This vulnerability was fixed in Firefox 148.0.2.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
     <cve_id>CVE-2026-3823</cve_id>
     <title>Atop Technologies｜EHG2408 series switch - Stack-based Buffer Overflow</title>
     <vendor>Atop Technologies</vendor>
@@ -46460,32 +45186,6 @@
     <description_features>
       <length>710</length>
       <text>Philips Hue Bridge Zigbee Stack Custom Command Handler Heap-based Buffer Overflow Remote Code Execution Vulnerability. This vulnerability allows network-adjacent attackers to execute arbitrary code on affected installations of Philips Hue Bridge. User interaction is required to exploit this vulnerability in that the user must initiate the device pairing process. The specific flaw exists within the handling of custom Zigbee ZCL frames in the Model Info download functionality. The issue results from the lack of proper validation of the size of data prior to copying it to a fixed-size heap buffer. An attacker can leverage this vulnerability to execute code in the context of the device. Was ZDI-CAN-28276.</text>
-    </description_features>
-  </vulnerability>
-  <vulnerability>
-    <cve_id>CVE-2026-35547</cve_id>
-    <title>Heap overflow in libnv</title>
-    <vendor>FreeBSD</vendor>
-    <attack_type>Buffer Overflow</attack_type>
-    <dates>
-      <published>2026-04-30</published>
-      <last_modified>2026-04-30</last_modified>
-    </dates>
-    <year>2026</year>
-    <cvss_features>
-      <score/>
-      <severity_level/>
-      <severity_numeric/>
-      <has_cvss>0</has_cvss>
-    </cvss_features>
-    <cwe_features>
-      <cwe_count>2</cwe_count>
-      <cwe_ids>CWE-122|CWE-130</cwe_ids>
-      <cwe_names>Heap-based Buffer Overflow|Improper Handling of Length Parameter Inconsistency</cwe_names>
-    </cwe_features>
-    <description_features>
-      <length>340</length>
-      <text>When processing the header of an incoming message, libnv failed to properly validate the message size. The lack of validation allows a malicious program to write outside the bounds of a heap allocation. This can trigger a crash or system panic, and it may be possible for an unprivileged user to exploit the bug to elevate their privileges.</text>
     </description_features>
   </vulnerability>
   <vulnerability>
